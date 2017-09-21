@@ -351,7 +351,9 @@
 			var h = document.documentElement.clientHeight;
 			var w = document.documentElement.clientWidth;
 			
-			$(".red_bg").css("height",h+"px")
+			$(".red_bg").css("height",h+"px");
+			
+			
 			var SHAKE_THRESHOLD = 3000;
 			var last_update = 0;
 			var x = y = z = last_x = last_y = last_z = 0;
@@ -380,13 +382,13 @@
 					if(speed > SHAKE_THRESHOLD) {
 						//alert("摇动了")
 						if(shaketype) {
-							shakeAudio();
+							//shakeAudio();
 							//骰子蛊 状态变为 摇动
 							shaketype = false;
 							$('#coverbox').removeClass('coverbox').addClass('shake');
 							setTimeout(function() {
-								shakePause();
-								openAudio();
+								//shakePause();
+								//openAudio();
 								//骰子蛊 状态变为 移开
 								$('#coverbox').removeClass('shake').addClass('moveout');
 								// 显示骰子
