@@ -11,7 +11,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<meta name="author" content="wwl">
-		<title>模板</title>
+		<title>摇一摇</title>
 
 		<style>
 			body {
@@ -89,7 +89,6 @@
 				-moz-animation: mymove .4s ease-out infinite;
 				-ms-animation: mymove .4s ease-out infinite;
 				animation: mymove .4s ease-out infinite;
-				
 			}
 			
 			@keyframes mymove {
@@ -307,17 +306,15 @@
 	</head>
 
 	<body onload="init()">
-		<div class="audio" style="width:0; height:0px; overflow:hidden; text-indent:-999px;">
-			<audio id='shakemusic'  style="width:0; height:0px;">
+		<!--<div class="audio" style="width:0; height:0px; overflow:hidden; text-indent:-999px;">
+			<audio id='shakemusic' style="width:0; height:0px;">
 				<source src="sonds/yao.mp3" type="audio/mp3" />
-    			<source src="sonds/yao.ogg" type="audio/ogg" />
+				<source src="sonds/yao.ogg" type="audio/ogg" />
 			</audio>
-			<audio id="openmusic"  style="display: none;">
+			<audio id="openmusic" style="display: none;">
 				<source src="sonds/red-02.mp3" type="audio/mp3" />
 			</audio>
-			<!--<audio id='shakemusic' src='sonds/red-01.mp3'   style="width:0; height:0px;"></audio>-->
-			<!--<audio id="openmusic" src="sonds/red-02.mp3" style="display: none;"></audio>-->
-		</div>
+		</div>-->
 		<div class="red_bg">
 			<div class="content">
 
@@ -329,7 +326,6 @@
 					<div class="sz sz-center  hidden"></div>
 					<div class="sz sz-right  hidden"></div>
 				</div>
-
 
 				<div class="model-bg hidden"></div>
 				<div class="play-again hidden">
@@ -343,14 +339,13 @@
 			</div>
 		</div>
 
-		<script src="js/jquery.min.js"></script>
+		<script src="js/zepto.min.js"></script>
 		<script type="text/javascript">
 			var h = document.documentElement.clientHeight;
 			var w = document.documentElement.clientWidth;
-			
-			$(".red_bg").css("height",h+"px");
-			
-			
+
+			$(".red_bg").css("height", h + "px");
+
 			var SHAKE_THRESHOLD = 3000;
 			var last_update = 0;
 			var x = y = z = last_x = last_y = last_z = 0;
@@ -379,14 +374,10 @@
 					if(speed > SHAKE_THRESHOLD) {
 						//alert("摇动了")
 						if(shaketype) {
-//							document.getElementById("shakemusic").play();
 							//骰子蛊 状态变为 摇动
 							shaketype = false;
 							$('#coverbox').removeClass('coverbox').addClass('shake');
 							setTimeout(function() {
-								//shakePause();
-								//openAudio();
-//								document.getElementById("openmusic").play();
 								//骰子蛊 状态变为 移开
 								$('#coverbox').removeClass('shake').addClass('moveout');
 								// 显示骰子
@@ -395,7 +386,6 @@
 								var p2 = rsz();
 								var p3 = rsz();
 								console.log(p1 + '-----' + p2 + '-----' + p3)
-//								$(".aa").text(p1 + '-----' + p2 + '-----' + p3)
 								//骰子 确定点数
 								$('.sz-left').addClass('sz-' + p1)
 								$('.sz-center').addClass('sz-' + p2)
@@ -406,7 +396,6 @@
 								//计算 得分点数
 								$('.play-again .num span').text(p1 * 1 + p2 * 1 + p3 * 1)
 
-								
 							}, 2000);
 
 						}
@@ -422,28 +411,6 @@
 			function rsz() {
 				return Math.floor(Math.random() * 6 + 1)
 			}
-
-//			//摇动声音开启
-//			function shakeAudio() {
-//				if(window.HTMLAudioElement) {
-//					var shakeAudio = document.getElementById("shakemusic");
-//					shakeAudio.play();
-//				}
-//			}
-//			//摇动声音关闭
-//			function shakePause() {
-//				if(window.HTMLAudioElement) {
-//					var shakeAudio = document.getElementById("shakemusic");
-//					shakeAudio.pause();
-//				}
-//			}
-//			//开奖声音开启
-//			function openAudio() {
-//				if(window.HTMLAudioElement) {
-//					var openAudio = document.getElementById("openmusic");
-//					openAudio.play();
-//				}
-//			}
 
 			//重置 页面设置
 			$('.reset').on('click', function() {
