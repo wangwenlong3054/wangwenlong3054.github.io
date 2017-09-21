@@ -309,12 +309,11 @@
 	<body onload="init()">
 		<div class="audio" style="width:0; height:0px; overflow:hidden; text-indent:-999px;">
 			<audio id='shakemusic'  style="width:0; height:0px;">
-				<source src="sonds/yao1.mp3" type="audio/mp3" />
-    			<source src="sonds/yao1.ogg" type="audio/ogg" />
+				<source src="sonds/yao.mp3" type="audio/mp3" />
+    			<source src="sonds/yao.ogg" type="audio/ogg" />
 			</audio>
 			<audio id="openmusic"  style="display: none;">
-				<source src="sonds/kai.mp3" type="audio/mp3" />
-    			<source src="sonds/kai.ogg" type="audio/ogg" />
+				<source src="sonds/red-02.mp3" type="audio/mp3" />
 			</audio>
 			<!--<audio id='shakemusic' src='sonds/red-01.mp3'   style="width:0; height:0px;"></audio>-->
 			<!--<audio id="openmusic" src="sonds/red-02.mp3" style="display: none;"></audio>-->
@@ -382,13 +381,14 @@
 					if(speed > SHAKE_THRESHOLD) {
 						//alert("摇动了")
 						if(shaketype) {
-							shakeAudio();
+							document.getElementById("shakemusic").play();
 							//骰子蛊 状态变为 摇动
 							shaketype = false;
 							$('#coverbox').removeClass('coverbox').addClass('shake');
 							setTimeout(function() {
-								shakePause();
-								openAudio();
+								//shakePause();
+								//openAudio();
+								document.getElementById("openmusic").play();
 								//骰子蛊 状态变为 移开
 								$('#coverbox').removeClass('shake').addClass('moveout');
 								// 显示骰子
@@ -425,27 +425,27 @@
 				return Math.floor(Math.random() * 6 + 1)
 			}
 
-			//摇动声音开启
-			function shakeAudio() {
-				if(window.HTMLAudioElement) {
-					var shakeAudio = document.getElementById("shakemusic");
-					shakeAudio.play();
-				}
-			}
-			//摇动声音关闭
-			function shakePause() {
-				if(window.HTMLAudioElement) {
-					var shakeAudio = document.getElementById("shakemusic");
-					shakeAudio.pause();
-				}
-			}
-			//开奖声音开启
-			function openAudio() {
-				if(window.HTMLAudioElement) {
-					var openAudio = document.getElementById("openmusic");
-					openAudio.play();
-				}
-			}
+//			//摇动声音开启
+//			function shakeAudio() {
+//				if(window.HTMLAudioElement) {
+//					var shakeAudio = document.getElementById("shakemusic");
+//					shakeAudio.play();
+//				}
+//			}
+//			//摇动声音关闭
+//			function shakePause() {
+//				if(window.HTMLAudioElement) {
+//					var shakeAudio = document.getElementById("shakemusic");
+//					shakeAudio.pause();
+//				}
+//			}
+//			//开奖声音开启
+//			function openAudio() {
+//				if(window.HTMLAudioElement) {
+//					var openAudio = document.getElementById("openmusic");
+//					openAudio.play();
+//				}
+//			}
 
 			//重置 页面设置
 			$('.reset').on('click', function() {
