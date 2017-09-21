@@ -27,6 +27,7 @@
 					<div class="sz sz-center  hidden"></div>
 					<div class="sz sz-right  hidden"></div>
 				</div>
+				<div class="go"></div>
 				<div class="model-bg hidden"></div>
 				<div class="play-again hidden">
 					<div class="num">
@@ -39,7 +40,7 @@
 
 			</div>
 		</div>
-		<script src="js/zepto.min.js"></script>
+		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 		<!--<script src="js/main.js"></script>-->
 		<script>
 			//			var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
@@ -126,6 +127,36 @@
 
 				shaketype = true;
 			})
+			
+			$('.go').on('click', function() {
+				if(shaketype) {
+							//骰子蛊 状态变为 摇动
+							shaketype = false;
+							$('#coverbox').removeClass('coverbox').addClass('shake');
+							setTimeout(function() {
+								//骰子蛊 状态变为 移开
+								$('#coverbox').removeClass('shake').addClass('moveout');
+								// 显示骰子
+								$('.sz').removeClass('hidden')
+								var p1 = rsz();
+								var p2 = rsz();
+								var p3 = rsz();
+								console.log(p1 + '-----' + p2 + '-----' + p3)
+								//骰子 确定点数
+								$('.sz-left').addClass('sz-' + p1)
+								$('.sz-center').addClass('sz-' + p2)
+								$('.sz-right').addClass('sz-' + p3)
+								//显示遮罩 和 再来一次 窗口
+								$('.model-bg').removeClass('hidden')
+								$('.play-again').removeClass('hidden')
+								//计算 得分点数
+								$('.play-again .num span').text(p1 * 1 + p2 * 1 + p3 * 1)
+
+							}, 2000);
+
+						}
+			})
+			
 		</script>
 	</body>
 
