@@ -15,7 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="css/yao.css" />
 	</head>
 
-	<body>
+	<body onload="init()">
 
 		<div class="red_bg">
 			<div class="content">
@@ -41,19 +41,21 @@
 			</div>
 		</div>
 		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-		<!--<script src="js/main.js"></script>-->
 		<script>
-			//			var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
+			//var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
 
-			if(window.DeviceMotionEvent) {
-				window.addEventListener('devicemotion', deviceMotionHandler, false);
-			} else {
-				document.getElementById("log").innerText = '不支持该方法'
-			}
-			var defaultspeed = 30; //speed
+			var defaultspeed = 2500; //speed
 			var x = y = z = lastX = lastY = lastZ = 0;
 			var last_update = 0;
 			var shaketype = true;
+
+			function init() {
+				if(window.DeviceMotionEvent) {
+					window.addEventListener('devicemotion', deviceMotionHandler, false);
+				} else {
+					document.getElementById("log").innerText = '不支持该方法'
+				}
+			}
 
 			function deviceMotionHandler(eventData) {
 
@@ -127,36 +129,35 @@
 
 				shaketype = true;
 			})
-			
+
 			$('.go').on('click', function() {
 				if(shaketype) {
-							//骰子蛊 状态变为 摇动
-							shaketype = false;
-							$('#coverbox').removeClass('coverbox').addClass('shake');
-							setTimeout(function() {
-								//骰子蛊 状态变为 移开
-								$('#coverbox').removeClass('shake').addClass('moveout');
-								// 显示骰子
-								$('.sz').removeClass('hidden')
-								var p1 = rsz();
-								var p2 = rsz();
-								var p3 = rsz();
-								console.log(p1 + '-----' + p2 + '-----' + p3)
-								//骰子 确定点数
-								$('.sz-left').addClass('sz-' + p1)
-								$('.sz-center').addClass('sz-' + p2)
-								$('.sz-right').addClass('sz-' + p3)
-								//显示遮罩 和 再来一次 窗口
-								$('.model-bg').removeClass('hidden')
-								$('.play-again').removeClass('hidden')
-								//计算 得分点数
-								$('.play-again .num span').text(p1 * 1 + p2 * 1 + p3 * 1)
+					//骰子蛊 状态变为 摇动
+					shaketype = false;
+					$('#coverbox').removeClass('coverbox').addClass('shake');
+					setTimeout(function() {
+						//骰子蛊 状态变为 移开
+						$('#coverbox').removeClass('shake').addClass('moveout');
+						// 显示骰子
+						$('.sz').removeClass('hidden')
+						var p1 = rsz();
+						var p2 = rsz();
+						var p3 = rsz();
+						console.log(p1 + '-----' + p2 + '-----' + p3)
+						//骰子 确定点数
+						$('.sz-left').addClass('sz-' + p1)
+						$('.sz-center').addClass('sz-' + p2)
+						$('.sz-right').addClass('sz-' + p3)
+						//显示遮罩 和 再来一次 窗口
+						$('.model-bg').removeClass('hidden')
+						$('.play-again').removeClass('hidden')
+						//计算 得分点数
+						$('.play-again .num span').text(p1 * 1 + p2 * 1 + p3 * 1)
 
-							}, 2000);
+					}, 2000);
 
-						}
+				}
 			})
-			
 		</script>
 	</body>
 
