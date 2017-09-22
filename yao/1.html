@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Cache-Control" content="no-cache" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="MobileOptimized" content="240" />
+		<title>HTML摇一摇。。。</title>
+
+		<script type="text/javascript">
+			var SHAKE_THRESHOLD = 3000;
+			var last_update = 0;
+			var x = y = z = last_x = last_y = last_z = 0;
+			var count = 0;
+			function init() {
+				last_update = new Date().getTime();
+				if(window.DeviceMotionEvent) {
+					window.addEventListener('devicemotion', deviceMotionHandler, false);
+				} else {
+
+					alert('not support mobile event');
+				}
+			}
+
+			function deviceMotionHandler(eventData) {
+
+				var acceleration = eventData.accelerationIncludingGravity;
+
+				var curTime = new Date().getTime();
+				if((curTime - last_update) > 100) {
+					var diffTime = curTime - last_update;
+					last_update = curTime;
+					x = acceleration.x;
+					y = acceleration.y;
+					z = acceleration.z;
+					var speed = Math.abs(x + y + z - last_x - last_y - last_z) /
+						diffTime * 10000;
+
+					if(speed > SHAKE_THRESHOLD) {
+						alert("shaked");
+						count++
+						document.getElementById('log').innerHTML +="<br/> shaked"+count
+						
+						
+						
+					}
+					last_x = x;
+					last_y = y;
+					last_z = z;
+				}
+
+			}
+		</script>
+
+	</head>
+
+	<body onload="init()">
+		<div id="log" class="log">
+			
+		</div>
+	</body>
+
+</html>
