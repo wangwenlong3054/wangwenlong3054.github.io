@@ -25,7 +25,7 @@
 					<div class="sz sz-center  hidden"></div>
 					<div class="sz sz-right  hidden"></div>
 				</div>
-				<!--<div class="go"></div>-->
+				<div class="go"></div>
 				<div class="model-bg hidden"></div>
 				<div class="play-again hidden">
 					<div class="num">
@@ -42,7 +42,7 @@
 		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 		<script>
 			const EMPTY_VALUE = 100;
-			const THREAD_HOLD = 100;
+			const THREAD_HOLD = 20;
 			var minX = EMPTY_VALUE,
 				minY = EMPTY_VALUE,
 				minZ = EMPTY_VALUE;
@@ -61,7 +61,6 @@
 					if(shaketype) {
 						count++
 						document.getElementById('a').innerHTML = "shake" + count;
-
 						//骰子蛊 状态变为 摇动
 						shaketype = false;
 						$('#coverbox').removeClass('coverbox').addClass('shake');
