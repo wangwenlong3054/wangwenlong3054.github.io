@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-		<div class="content">
+		<!--<div class="content">
 
 			<div id="log" class="log"></div>
 			<div class="table-content">
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 
-		</div>
+		</div>-->
 		<div id="aa">
 			写点什么
 		</div>
@@ -96,7 +96,7 @@
 
 						document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
 						setTimeout(function() {
-							document.getElementById("bb").innerText = "x:" + x + "<br />y:" + y + "<br />z:" + z;
+							document.getElementById("bb").innerHTML = "x:" + x + "<br />y:" + y + "<br />z:" + z;
 						}, 2000);
 
 					}
