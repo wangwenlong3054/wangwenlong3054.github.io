@@ -25,7 +25,7 @@
 					<div class="sz sz-center  hidden"></div>
 					<div class="sz sz-right  hidden"></div>
 				</div>
-				<div class="go"></div>
+				<!--<div class="go"></div>-->
 				<div class="model-bg hidden"></div>
 				<div class="play-again hidden">
 					<div class="num">
@@ -42,7 +42,7 @@
 		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 		<script>
 			const EMPTY_VALUE = 100;
-			const THREAD_HOLD = 13.8;
+			const THREAD_HOLD = 100;
 			var minX = EMPTY_VALUE,
 				minY = EMPTY_VALUE,
 				minZ = EMPTY_VALUE;
@@ -57,10 +57,11 @@
 				if(y < minY) minY = y;
 				if(z < minZ) minZ = z;
 				if(Math.abs(x + y + z - minX - minY - minZ) > THREAD_HOLD) {
-					count++
-					document.getElementById('a').innerHTML = "shake" + count;
-					
+
 					if(shaketype) {
+						count++
+						document.getElementById('a').innerHTML = "shake" + count;
+
 						//骰子蛊 状态变为 摇动
 						shaketype = false;
 						$('#coverbox').removeClass('coverbox').addClass('shake');
@@ -85,9 +86,7 @@
 
 						}, 2000);
 					}
-					
-					
-					
+
 					var event = new CustomEvent("shake");
 					window.dispatchEvent(event);
 					minX = minY = minZ = EMPTY_VALUE;
@@ -97,11 +96,7 @@
 			window.addEventListener("shake", function() {
 				document.getElementById('b').innerHTML = 'window shake callback was called';
 			});
-			
-			
-			
-			
-			
+
 			//随机点数
 			function rsz() {
 				return Math.floor(Math.random() * 6 + 1)
@@ -119,17 +114,6 @@
 
 				shaketype = true;
 			})
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		</script>
 	</body>
 
