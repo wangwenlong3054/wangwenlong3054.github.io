@@ -12,37 +12,60 @@
 		<meta name="keywords" content="">
 		<meta name="author" content="wwl">
 		<title>模板</title>
+		<link rel="stylesheet" type="text/css" href="css/yao.css" />
 	</head>
 
 	<body>
+		<div class="content">
 
+			<div id="log" class="log"></div>
+			<div class="table-content">
+				<div id="coverbox" class="coverbox"></div>
+				<div class="sz sz-left  hidden"></div>
+				<div class="sz sz-center  hidden"></div>
+				<div class="sz sz-right  hidden"></div>
+			</div>
+			<div class="go"></div>
+			<div class="model-bg hidden"></div>
+			<div class="play-again hidden">
+				<div class="num">
+					您的点数：<span>20</span>
+				</div>
+				<div class="btn">
+					<button class="reset">再来一次</button>
+				</div>
+			</div>
+
+		</div>
 		<div id="aa">
 			写点什么
 		</div>
 		<div id="bb">
 			bb
 		</div>
+		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+
 		<script>
-			//			if(window.DeviceOrientationEvent) {
-			//				window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
-			//			} else {
-			//				alert("您的浏览器不支持DeviceOrientation");
-			//			}
-			//			var adiv = document.getElementById("aa");
-			//
-			//			function DeviceOrientationHandler(event) {
-			//				var alpha = event.alpha,
-			//					beta = event.beta,
-			//					gamma = event.gamma;
-			//
-			//				if(alpha != null || beta != null || gamma != null) {
-			//					adiv.innerHTML = "alpha:" + alpha + "<br />beta:" + beta + "<br />gamma:" + gamma;
-			//
-			//				} else {
-			//					document.getElementById("aa").innerHTML = "当前浏览器不支持DeviceOrientation";
-			//					//aa.innerHTML = "当前浏览器不支持DeviceOrientation"
-			//				}
-			//			}
+			if(window.DeviceOrientationEvent) {
+				window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+			} else {
+				alert("您的浏览器不支持DeviceOrientation");
+			}
+			var adiv = document.getElementById("aa");
+
+			function DeviceOrientationHandler(event) {
+				var alpha = event.alpha,
+					beta = event.beta,
+					gamma = event.gamma;
+
+				if(alpha != null || beta != null || gamma != null) {
+					adiv.innerHTML = "alpha:" + alpha + "<br />beta:" + beta + "<br />gamma:" + gamma;
+
+				} else {
+					document.getElementById("aa").innerHTML = "当前浏览器不支持DeviceOrientation";
+					//aa.innerHTML = "当前浏览器不支持DeviceOrientation"
+				}
+			}
 
 			var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
 
