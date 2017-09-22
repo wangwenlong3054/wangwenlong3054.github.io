@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>模板</title>
+
+	</head>
+
+	<body>
+		<div id="a"></div>
+		<div id="b"></div>
+		<script>
+			const EMPTY_VALUE = 100;
+			const THREAD_HOLD = 13.8;
+			var minX = EMPTY_VALUE,
+				minY = EMPTY_VALUE;
+			var count = 0;
+			window.ondevicemotion = function(event) {
+				var gravity = event.accelerationIncludingGravity,
+					x = gravity.x,
+					y = gravity.y;
+				if(x < minX) minX = x;
+				if(y < minY) minY = y;
+				if(Math.abs(x - minX) > THREAD_HOLD && Math.abs(y - minY) > THREAD_HOLD) {
+					count++
+					document.getElementById('a').innerHTML = "shake" + count;
+					var event = new CustomEvent("shake");
+					window.dispatchEvent(event);
+					minX = minY = EMPTY_VALUE;
+				}
+			}
+
+			window.addEventListener("shake", function() {
+				document.getElementById('b').innerHTML = 'window shake callback was called';
+				//console.log("window shake callback was called");
+			});
+		</script>
+	</body>
+
+</html>
