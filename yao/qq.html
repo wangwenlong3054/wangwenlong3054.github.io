@@ -81,6 +81,8 @@
 			var count = 0;
 
 			function deviceMotionHandler(eventData) {　　 // 获取含重力的加速度
+				
+				$("#yaoyiyaoyes").append("<br/>----进入deviceMotionHandler方法")
 				var acceleration = eventData.accelerationIncludingGravity;　　 // 获取当前时间
 				var curTime = new Date().getTime();　　
 				var diffTime = curTime - last_update;　　 // 固定时间段
