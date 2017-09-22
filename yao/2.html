@@ -12,37 +12,124 @@
 		<meta name="keywords" content="">
 		<meta name="author" content="wwl">
 		<title>模板</title>
-
+		<link rel="stylesheet" type="text/css" href="css/yao.css" />
 	</head>
 
 	<body>
-		<div id="a"></div>
-		<div id="b"></div>
+
+		<div class="red_bg">
+			<div class="content">
+				<div class="table-content">
+					<div id="coverbox" class="coverbox"></div>
+					<div class="sz sz-left  hidden"></div>
+					<div class="sz sz-center  hidden"></div>
+					<div class="sz sz-right  hidden"></div>
+				</div>
+				<div class="go"></div>
+				<div class="model-bg hidden"></div>
+				<div class="play-again hidden">
+					<div class="num">
+						您的点数：<span>20</span>
+					</div>
+					<div class="btn">
+						<button class="reset">再来一次</button>
+					</div>
+				</div>
+				<div id="a"></div>
+				<div id="b"></div>
+			</div>
+		</div>
+		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 		<script>
 			const EMPTY_VALUE = 100;
 			const THREAD_HOLD = 13.8;
 			var minX = EMPTY_VALUE,
-				minY = EMPTY_VALUE;
+				minY = EMPTY_VALUE,
+				minZ = EMPTY_VALUE;
 			var count = 0;
+			var shaketype = true;
 			window.ondevicemotion = function(event) {
 				var gravity = event.accelerationIncludingGravity,
 					x = gravity.x,
 					y = gravity.y;
+				z = gravity.z;
 				if(x < minX) minX = x;
 				if(y < minY) minY = y;
-				if(Math.abs(x - minX) > THREAD_HOLD && Math.abs(y - minY) > THREAD_HOLD) {
+				if(z < minZ) minZ = z;
+				if(Math.abs(x + y + z - minX - minY - minZ) > THREAD_HOLD) {
 					count++
 					document.getElementById('a').innerHTML = "shake" + count;
+					
+					if(shaketype) {
+						//骰子蛊 状态变为 摇动
+						shaketype = false;
+						$('#coverbox').removeClass('coverbox').addClass('shake');
+						setTimeout(function() {
+							//骰子蛊 状态变为 移开
+							$('#coverbox').removeClass('shake').addClass('moveout');
+							// 显示骰子
+							$('.sz').removeClass('hidden')
+							var p1 = rsz();
+							var p2 = rsz();
+							var p3 = rsz();
+							console.log(p1 + '-----' + p2 + '-----' + p3)
+							//骰子 确定点数
+							$('.sz-left').addClass('sz-' + p1)
+							$('.sz-center').addClass('sz-' + p2)
+							$('.sz-right').addClass('sz-' + p3)
+							//显示遮罩 和 再来一次 窗口
+							$('.model-bg').removeClass('hidden')
+							$('.play-again').removeClass('hidden')
+							//计算 得分点数
+							$('.play-again .num span').text(p1 * 1 + p2 * 1 + p3 * 1)
+
+						}, 2000);
+					}
+					
+					
+					
 					var event = new CustomEvent("shake");
 					window.dispatchEvent(event);
-					minX = minY = EMPTY_VALUE;
+					minX = minY = minZ = EMPTY_VALUE;
 				}
 			}
 
 			window.addEventListener("shake", function() {
 				document.getElementById('b').innerHTML = 'window shake callback was called';
-				//console.log("window shake callback was called");
 			});
+			
+			
+			
+			
+			
+			//随机点数
+			function rsz() {
+				return Math.floor(Math.random() * 6 + 1)
+			}
+
+			//重置 页面设置
+			$('.reset').on('click', function() {
+				$('#coverbox').removeAttr('class').attr('class', 'coverbox')
+				//$('.sz').addClass('hidden')
+				$('.model-bg').addClass('hidden')
+				$('.play-again').addClass('hidden')
+				$('.sz').eq(0).removeAttr('class').attr('class', 'sz sz-left  hidden')
+				$('.sz').eq(1).removeAttr('class').attr('class', 'sz sz-center  hidden')
+				$('.sz').eq(2).removeAttr('class').attr('class', 'sz sz-right  hidden')
+
+				shaketype = true;
+			})
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</script>
 	</body>
 
