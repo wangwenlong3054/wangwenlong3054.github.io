@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<title>摇一摇</title>
+
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		<script src="js/yaoyiyao.js"></script>
+		<!--<script src="Pandora.AutoSize.js"></script>-->
+
+		<style>
+			html {
+				overflow: hidden;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			.xyp {
+				width: 15.00234411626817rem;
+				height: 26.7rem;
+				background: #eee;
+				background-size: 100% 100%;
+			}
+			
+			.div1 {
+				width: 15.00234411626817rem;
+				height: 26.7rem;
+				z-index: 2;
+				display: none;
+			}
+			
+			.div1 img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.div2 {
+				width: 5%;
+				height: 4.5%;
+				position: relative;
+				top: 82%;
+				left: 47%;
+				font-style: italic;
+				color: red;
+				font-weight: bold;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				document.body.addEventListener("touchmove", function(event) {
+					event.preventDefault();
+				});
+			};
+		</script>
+		<script>
+			$(function() {
+				//				$("body").AutoSize();
+				//对应属性:重力灵敏度,甩动力度,甩动次数,甩动中,甩动后
+				/*  $(document).Grav(200,200,3,function(){
+				        alert("摇动中。。。");
+				        },function(){
+				        alert("摇动了！");
+				        });*/
+				var a = 3;
+				yaoyiyao();
+
+				function yaoyiyao() {
+					$(document).Grav({
+						//重力灵敏度
+						ShakeRate: 200,
+						//甩动力度
+						power: 1000,
+						//甩动次数
+						ShakeTotal: 3,
+
+						//甩动中
+						Shaking: function() {
+							//alert("甩动中");
+							$("#div2").html("甩动中")
+						},
+						//甩动后
+						callback: function() {
+							//alert("甩动后");
+							a--;
+							$("#div1").css("display", "block");
+							$("#div2").html(a);
+						}
+
+					});
+				}
+
+				$("#div1").click(function() {
+					$("#div1").css("display", "none");
+					if(a > 0) {
+						yaoyiyao()
+					} else {
+						alert("您已经超出今日最大摇奖次数");
+					}
+				});
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="xyp">
+			<div class="div1" id="div1">div1</div>
+			<div class="div2" id="div2"></div>
+		</div>
+	</body>
+
+</html>
