@@ -57,7 +57,7 @@
 				y = acceleration.y;
 				z = acceleration.z;
 
-				if(Math.abs(x - lastX) > 30 || Math.abs(y - lastY) > 30) {
+				if(Math.abs(x - last_x) > 30 || Math.abs(y - last_y) > 30) {
 					count++
 					document.getElementById('count').innerHTML += "<br/> shaked" + count;
 					document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
