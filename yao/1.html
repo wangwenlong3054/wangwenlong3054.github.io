@@ -8,6 +8,16 @@
 		<meta name="MobileOptimized" content="240" />
 		<title>HTML摇一摇。。。</title>
 
+	</head>
+
+	<body onload="init()">
+		<div id="count" style="padding: 15px;font-size: 15px;border:1px solid #000"></div>
+		<div id="log" class="log">
+			<div id="bb1"></div>
+			<div id="bb2"></div>
+			<div id="bb3"></div>
+		</div>
+
 		<script type="text/javascript">
 			var SHAKE_THRESHOLD = 3000;
 			var last_update = 0;
@@ -56,31 +66,14 @@
 				x = acceleration.x;
 				y = acceleration.y;
 				z = acceleration.z;
+				document.getElementById('count').innerHTML += "我在方法内部---<br/>";
 
-				if(Math.abs(x - last_x) > 30 || Math.abs(y - last_y) > 30) {
-					count++
-					document.getElementById('count').innerHTML += "<br/> shaked" + count;
-					document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
-					document.getElementById("bb1").innerHTML = "x:" + x;
-					document.getElementById("bb2").innerHTML = "y:" + y;
-					document.getElementById("bb3").innerHTML = "z:" + z;
+				if(x != 0) {
+					document.getElementById('bb1').innerHTML += "x:---" + x + "<br/>";
 				}
-				last_x = x;
-				last_y = y;
-				last_z = z;
 
 			}
 		</script>
-
-	</head>
-
-	<body onload="init()">
-		<div id="count" style="padding: 15px;font-size: 15px;border:1px solid #000"></div>
-		<div id="log" class="log">
-			<div id="bb1"></div>
-			<div id="bb2"></div>
-			<div id="bb3"></div>
-		</div>
 	</body>
 
 </html>
