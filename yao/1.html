@@ -13,6 +13,9 @@
 			var last_update = 0;
 			var x = y = z = last_x = last_y = last_z = 0;
 			var count = 0;
+
+			var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
+
 			function init() {
 				last_update = new Date().getTime();
 				if(window.DeviceMotionEvent) {
@@ -27,28 +30,44 @@
 
 				var acceleration = eventData.accelerationIncludingGravity;
 
-				var curTime = new Date().getTime();
-				if((curTime - last_update) > 20) {
-					var diffTime = curTime - last_update;
-					last_update = curTime;
-					x = acceleration.x;
-					y = acceleration.y;
-					z = acceleration.z;
-					var speed = Math.abs(x + y + z - last_x - last_y - last_z) /
-						diffTime * 10000;
+				//				var curTime = new Date().getTime();
+				//				if((curTime - last_update) > 20) {
+				//					var diffTime = curTime - last_update;
+				//					last_update = curTime;
+				//					x = acceleration.x;
+				//					y = acceleration.y;
+				//					z = acceleration.z;
+				//					var speed = Math.abs(x + y + z - last_x - last_y - last_z) /
+				//						diffTime * 10000;
+				//
+				//					if(speed > SHAKE_THRESHOLD) {
+				//						alert("shaked");
+				//						count++
+				//						document.getElementById('log').innerHTML +="<br/> shaked"+count
+				//						
+				//						
+				//						
+				//					}
+				//					last_x = x;
+				//					last_y = y;
+				//					last_z = z;
+				//				}
 
-					if(speed > SHAKE_THRESHOLD) {
-						alert("shaked");
-						count++
-						document.getElementById('log').innerHTML +="<br/> shaked"+count
-						
-						
-						
-					}
-					last_x = x;
-					last_y = y;
-					last_z = z;
+				x = acceleration.x;
+				y = acceleration.y;
+				z = acceleration.z;
+
+				if(Math.abs(x - lastX) > 30 || Math.abs(y - lastY) > 30) {
+					count++
+					document.getElementById('count').innerHTML += "<br/> shaked" + count;
+					document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
+					document.getElementById("bb-1").innerHTML = "x:" + x;
+					document.getElementById("bb-2").innerHTML = "y:" + y;
+					document.getElementById("bb-3").innerHTML = "z:" + z;
 				}
+				last_x = x;
+				last_y = y;
+				last_z = z;
 
 			}
 		</script>
@@ -56,8 +75,11 @@
 	</head>
 
 	<body onload="init()">
+		<div id="count" style="padding: 15px;font-size: 15px;border:1px solid #000"></div>
 		<div id="log" class="log">
-			
+			<div id="bb-1"></div>
+			<div id="bb-2"></div>
+			<div id="bb-3"></div>
 		</div>
 	</body>
 
