@@ -61,9 +61,9 @@
 					count++
 					document.getElementById('count').innerHTML += "<br/> shaked" + count;
 					document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
-					document.getElementById("bb-1").innerHTML = "x:" + x;
-					document.getElementById("bb-2").innerHTML = "y:" + y;
-					document.getElementById("bb-3").innerHTML = "z:" + z;
+					document.getElementById("bb1").innerHTML = "x:" + x;
+					document.getElementById("bb2").innerHTML = "y:" + y;
+					document.getElementById("bb3").innerHTML = "z:" + z;
 				}
 				last_x = x;
 				last_y = y;
@@ -77,9 +77,9 @@
 	<body onload="init()">
 		<div id="count" style="padding: 15px;font-size: 15px;border:1px solid #000"></div>
 		<div id="log" class="log">
-			<div id="bb-1"></div>
-			<div id="bb-2"></div>
-			<div id="bb-3"></div>
+			<div id="bb1"></div>
+			<div id="bb2"></div>
+			<div id="bb3"></div>
 		</div>
 	</body>
 
