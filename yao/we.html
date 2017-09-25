@@ -40,47 +40,45 @@
 		<div id="aa">
 			写点什么
 		</div>
-		<div id="bb">
+		<div id="bb" style="margin-top: 40px; padding: 40px; font-size: 15px;">
 			bb
 		</div>
 		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 
 		<script>
-			document.addEventListener('WeixinJSBridgeReady', init, false)
+			//			document.addEventListener('WeixinJSBridgeReady', init, false)
 
-			//			function init() {
-			//				if(window.DeviceOrientationEvent) {
-			//					window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
-			//				} else {
-			//					alert("您的浏览器不支持DeviceOrientation");
-			//				}
-			//			}
-			//
-			//			var adiv = document.getElementById("aa");
-			//
-			//			function DeviceOrientationHandler(event) {
-			//				var alpha = event.alpha,
-			//					beta = event.beta,
-			//					gamma = event.gamma;
-			//
-			//				if(alpha != null || beta != null || gamma != null) {
-			//					adiv.innerHTML = "alpha:" + alpha + "<br />beta:" + beta + "<br />gamma:" + gamma;
-			//
-			//				} else {
-			//					document.getElementById("aa").innerHTML = "当前浏览器不支持DeviceOrientation";
-			//					//aa.innerHTML = "当前浏览器不支持DeviceOrientation"
-			//				}
-			//			}
+			function initA() {
+				if(window.DeviceOrientationEvent) {
+					window.addEventListener('deviceorientation', DeviceOrientationHandler, false);
+				} else {
+					alert("您的浏览器不支持DeviceOrientation");
+				}
+			}
+
+			var adiv = document.getElementById("aa");
+
+			function DeviceOrientationHandler(event) {
+				var alpha = event.alpha,
+					beta = event.beta,
+					gamma = event.gamma;
+
+				if(alpha != null || beta != null || gamma != null) {
+					adiv.innerHTML = "alpha:" + alpha + "<br />beta:" + beta + "<br />gamma:" + gamma;
+
+				} else {
+					adiv.innerHTML = "当前浏览器不支持DeviceOrientation";
+				}
+			}
 
 			var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
 
-			function init() {
+			function initB() {
 				if(window.DeviceMotionEvent) {
 					window.addEventListener('devicemotion', deviceMotionHandler, false);
 				} else {
 					document.getElementById("bb").innerText = '不支持该方法'
 				}
-				document.getElementById("aa").innerHTML="进入init";
 			}
 
 			var defaultspeed = 30; //speed
@@ -104,9 +102,7 @@
 					if(speed > defaultspeed) {
 
 						document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
-						setTimeout(function() {
-							document.getElementById("bb").append("x:" + x + "<br />y:" + y + "<br />z:" + z)
-						}, 2000);
+						document.getElementById("bb").append("x:" + x + "<br />y:" + y + "<br />z:" + z)
 
 					}
 					lastX = x;
