@@ -20,7 +20,10 @@
 			写点什么
 		</div>
 		<div id="bb" style="margin-top: 40px; padding: 40px; font-size: 15px;">
-			bb
+			<div id="bb-0"></div>
+			<div id="bb-1"></div>
+			<div id="bb-2"></div>
+			<div id="bb-3"></div>
 		</div>
 
 		<script>
@@ -44,33 +47,32 @@
 				}
 			}
 
-			var color = new Array('#fff', '#ff0', '#f00', '#000', '#00f', '#0ff');
 			if(window.DeviceMotionEvent) {
 				window.addEventListener('devicemotion', deviceMotionHandler, false);
 			} else {
-				document.getElementById("bb").innerText = '不支持该方法'
+				document.getElementById("bb-0").innerText = '不支持该方法'
 			}
 
 			var speed = 30;
 			var x = y = z = lastX = lastY = lastZ = 0;
 
 			function deviceMotionHandler(eventData) {
-
-				var acceleration = eventData.accelerationIncludingGravity;
-
+				var acceleration = event.accelerationIncludingGravity;
 				x = acceleration.x;
 				y = acceleration.y;
 				z = acceleration.z;
-
+				
 				if(Math.abs(x - lastX) > speed || Math.abs(y - lastY) > speed) {
-
 					document.body.style.backgroundColor = color[Math.round(Math.random() * 10) % 6];
-					document.getElementById("bb").append("x:" + x + "<br />y:" + y + "<br />z:" + z)
-
+					document.getElementById("bb-1").innerHTML = "x:"+x;
+					document.getElementById("bb-2").innerHTML = "y:"+y;
+					document.getElementById("bb-3").innerHTML = "z:"+z;
+					
 				}
 				lastX = x;
 				lastY = y;
 				lastZ = z;
+
 
 			}
 		</script>
