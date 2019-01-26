@@ -273,7 +273,8 @@ function getPointAndLine() {
 		addMarker('e', "", endLng, endLat);
 	}
 
-	let urlStr = 'http://restapi.amap.com/v3/direction/driving?key=405ed507df4a92d0b2b6fa95410897b7&origin=' + startLng + ',' + startLat + '&destination=' + endLng + ',' + endLat + '&output=json&strategy=19'
+	let urlStr = 'https://restapi.amap.com/v3/direction/driving?key=405ed507df4a92d0b2b6fa95410897b7&origin=' + startLng + ',' + startLat + '&destination=' + endLng + ',' + endLat + '&output=json&strategy=19'
+	console.log(urlStr)
 	$.ajax({
 		type: "GET",
 		url: urlStr,
