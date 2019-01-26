@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>规划出行-线路推荐</title>
+
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/plan-trip.css">
+		<link rel="stylesheet" type="text/css" href="css/media.css">
+
+		<link rel="stylesheet" type="text/css" href="js/toast/toast.style.css">
+		<link rel="stylesheet" type="text/css" href="js/swiper/swiper.css">
+		<style>
+
+		</style>
+	</head>
+
+	<body id="tripLine">
+
+		<div class="main-content">
+			<!--<div class="top-search-content flex">
+				<span class="search-icon"></span>
+				<input id="searchName" type="text" placeholder="查找地点，高速公路收费站，高速公路服务区" />
+				<div class="search-btn-content flex">
+					<span class="search-clear-icon" onclick="goClear()"></span>
+					<button type="button" class="search-btn" onclick="goSearch()">搜索</button>
+				</div>
+			</div>-->
+
+			<div class="search-box flex box-shadow">
+				<div class="search-back" onclick="goToIndex()"></div>
+				<div class="search-area">
+					<form id="formStart" action="#" class="start-box"><input id="start" class="search-input input-start" type="text" readonly="readonly" placeholder="起点" /></form>
+					<form id="formEnd" action="#" class="end-box"><input id="end" class="search-input input-end" type="text" readonly="readonly" placeholder="终点" /></form>
+					<div class="icon-change" onclick="valueChange()"></div>
+				</div>
+			</div>
+
+			<div id="allmap" class="plan-trip-allmap"></div>
+
+			<div class="bottom-box">
+				<div class="map-rightbottom-tools">
+					<div id="zoomPlus" class="zoom-icon " onclick="zoomMapPlus()"><span class="icon-plus"></span></div>
+					<div id="zoomMinus" class="zoom-icon " onclick="zoomMapMinus()"><span class="icon-minus"></span></div>
+				</div>
+
+				<div class="map-leftbottom-tools">
+					<div id="myPosition" class="icon-left-tools " onclick="myMapPosition()"><span class="icon-position"></span></div>
+					<div id="allProvince" class="icon-left-tools" onclick="allMapProvince()"><span class="icon-province"></span></div>
+				</div>
+			</div>
+
+			<!--面板-->
+			<div id="mapPanel" class="map-panel">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-list">
+
+						</div>
+
+						<!--<div class="swiper-slide">
+							<div class="panel-item">
+								<h4 class="panel-title"><span class="title-mark">方案一</span></h4>
+								<div class="panel-body">
+									<p>约<span class="panel-time">5小时28分钟</span> | 约<span class="panel-mail">430.5</span>公里</p>
+									<p class="panel-pass">途经：<span class="panel-names">G10绥满高速-G1001哈尔滨绕城高速-G1011哈同高速-G11鹤大高速</span></p>
+								</div>
+							</div>
+							<div class="along" onclick="goPageAlong()">线路沿线服务</div>
+						</div>-->
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+
+			<!--toast 遮罩-->
+			<div class="toastmask hide"></div>
+			<div class="loading hide"><img src="images/loading.svg"></div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/toast/toast.script.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<!--高德-->
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=63cd2d0fe58d68595625e3f89b141dda&plugin=AMap.Driving,AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.DistrictSearch"></script>
+		<script type="text/javascript">
+			var AMapUIProtocol = 'https:'; //注意结尾包括冒号
+		</script>
+		<script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+		<script type="text/javascript" src="js/trip.js"></script>
+		<script src="js/swiper/swiper.min.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				initMap();
+
+			});
+		</script>
+		<script>
+			function goToIndex() {
+				let href = "index.html";
+				window.location.href = href;
+			}
+		</script>
+	</body>
+
+</html>

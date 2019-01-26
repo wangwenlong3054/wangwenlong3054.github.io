@@ -1,0 +1,156 @@
+/*header*/
+
+.flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex
+}
+
+.flex-align-center {
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center
+}
+
+.flex-pack-center {
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center
+}
+
+.flex-pack-justify {
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between
+}
+
+.header {
+	width: 100%;
+	height: 4.5rem;
+	background: #2487ff;
+	position: relative;
+	box-sizing: border-box
+}
+
+.header-title {
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	text-align: center !important;
+	font-size: 2rem
+}
+
+.header-regist {
+	width: auto;
+	height: 100%;
+	padding: 0 0.5rem;
+	position: absolute;
+	top: 0;
+	right: 1rem;
+	text-align: center
+}
+
+.header-regist a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	font-size: 1.4rem;
+	line-height: 4.5rem
+}
+
+.header-login {
+	width: 2rem;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 1rem;
+	text-align: center
+}
+
+.header-login a {
+	display: block;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	font-size: 1.4rem;
+	line-height: 4.5rem;
+	position: relative
+}
+
+.header-left-arrow {
+	display: block;
+	margin: 0 auto;
+	width: 0.75rem;
+	height: 1.5rem;
+	background: url(../images/header-left-arrow.png) no-repeat center center;
+	background-size: cover;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%)
+}
+
+#pageScenery{
+	/*background: #fff;*/
+}
+
+.banner{
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+
+.banner img{
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.des{
+	width: 100%;
+	height: auto;
+	box-sizing: border-box;
+	padding: 1rem;
+	background: #fff;
+	line-height: 2.4rem;
+	font-size: 1.4rem;
+	text-indent:2.8rem ;
+}
+
+.img-list{
+	width: 100%;
+	height: auto;
+	box-sizing: border-box;
+	padding: 1rem;
+	position: relative;
+	background: #fff;
+}
+.img-list img{
+	width: 100%;
+	height: auto;
+	display: block;
+	margin-bottom: 1rem;
+}
+
+
+.no-data{
+	padding: 2rem 0 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

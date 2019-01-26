@@ -1,0 +1,90 @@
+@media screen and (max-width:750px) {
+	html {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width:675px) {
+	html {
+		font-size: 18px;
+	}
+}
+
+@media screen and (max-width:600px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width:525px) {
+	html {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width:450px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+@media screen and (max-width:375px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+@media screen and (max-width:320px) {
+	html {
+		font-size: 12px;  
+	}
+	.gaosu-list-content .list-item .list-title{
+		padding: 0 0.7rem;
+	}
+	.gaosu-list-content .list-item .list-body{
+		padding: 0.5rem 0.7rem;
+	}
+	.list-body .list-info-line{
+		font-size: 1rem;
+	}
+	
+	
+	/*结算页面  开始*/
+	.store-info .store-position img{
+		width: 2rem;
+    	height: 2rem;
+	}
+	.store-info .store-img img{
+		height: 4rem;
+    	width: 4rem;
+	}
+	.store-info .store-img{
+		background: transparent;
+	}
+	.store-pic{
+		top: -3rem;
+	    width: 6rem;
+	    height: 6rem;
+	}
+	.store-pic img{
+		width: 4rem;
+    	height: 4rem;
+	}
+	
+	.img-info-box .img-border{
+		width: 5rem;
+    	height: 5rem;
+	}
+	.img-info-box .img-border img {
+	    height: 4rem;
+	    width: 4rem;
+	}
+	.goods-info .img-number{
+		height: 5rem;
+    	line-height: 5rem;
+	}
+	
+	
+	
+	
+}

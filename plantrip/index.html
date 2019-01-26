@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>规划出行</title>
+
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.css">
+		<link rel="stylesheet" type="text/css" href="css/plan-trip.css">
+		<link rel="stylesheet" type="text/css" href="css/media.css">
+
+		<link rel="stylesheet" type="text/css" href="js/toast/toast.style.css">
+		<style>
+
+		</style>
+	</head>
+
+	<body id="planTripIndex">
+
+		<!--<div class="header">
+			<div class="header-title flex flex-align-center flex-pack-center ">
+				规划出行
+			</div>
+			<div class="header-login  "></div>
+		</div>-->
+
+		<div class="main-content">
+			<div class="top-search-content flex">
+				<span class="search-icon"></span>
+				<input id="searchName" type="text" class="no-padding-right" placeholder="查找地点，高速公路收费站，高速公路服务区" onclick="goToSearch()" />
+				<!--<div class="search-btn-content flex">
+					<span class="search-clear-icon" onclick="goClear()"></span>
+					<button type="button" class="search-btn" onclick="goSearch()">搜索</button>
+				</div>-->
+			</div>
+
+			<div id="allmap" class="plan-trip-allmap"></div>
+
+			<div class="map-topright-tools">
+				<div id="traffic" class="icon-tools " onclick="trafficMarks()"><span class="icon-traffic"></span></div>
+				<div id="serviceArea" class="icon-tools " onclick="serviceAreaMarks()"><span class="icon-p"></span></div>
+				<div id="zhan" class="icon-tools " onclick="zhanMarks()"><span class="icon-zhan"></span></div>
+				<div id="city" class="icon-tools " onclick="cityMarks()"><span class="icon-city"></span></div>
+				<div id="scenery" class="icon-tools " onclick="sceneryMarks()"><span class="icon-scenery"></span></div>
+			</div>
+
+			<div class="bottom-box">
+				<div class="map-rightbottom-tools">
+					<div id="zoomPlus" class="zoom-icon " onclick="zoomMapPlus()"><span class="icon-plus"></span></div>
+					<div id="zoomMinus" class="zoom-icon " onclick="zoomMapMinus()"><span class="icon-minus"></span></div>
+				</div>
+
+				<div class="map-leftbottom-tools">
+					<div id="myPosition" class="icon-left-tools " onclick="myMapPosition()"><span class="icon-position"></span></div>
+					<div id="allProvince" class="icon-left-tools" onclick="allMapProvince()"><span class="icon-province"></span></div>
+				</div>
+				<div class="clearfix"></div>
+				<div id="infoBox" class="info-box hide">
+
+					<!--路况 信息窗口-->
+					<!--<div class="traffic-box">
+						<div class="traffic-body">
+							<div class="high-way-mark">
+								<div class="high-way-title">国家高速</div>
+								<div class="high-way-body">
+									<p class="high-way-num">G10</p>
+									<p class="high-way-name">绥满高速</p>
+								</div>
+							</div>
+							<div class="high-way-info">
+								<p class="highWaySection">海林市路段</p>
+								<p class="reason">大雪封路</p>
+								<p class="duration">封闭时间：2019年1月24日 至 2019年1月25日</p>
+							</div>
+						</div>
+						<div class="traffic-bottom">
+							<div class="link-more">查看更多路况信息</div>
+						</div>
+					</div>-->
+
+					<!--服务区 信息窗口-->
+					<!--<div class="service-box">
+						<div class="service-body">
+							<div class="high-way-mark">
+								<div class="high-way-title">国家高速</div>
+								<div class="high-way-body">
+									<p class="high-way-num">G10</p>
+									<p class="high-way-name">绥满高速</p>
+								</div>
+							</div>
+							<div class="service-info">
+								<p class="service-name">阿城-中石油服务区</p>
+								<div class="service-item">
+									<label>提供服务：</label>
+									<span class="item-badge">餐饮</span>
+									<span class="item-badge">超市</span>
+									<span class="item-badge">厕所</span>
+									<span class="item-badge">停车</span>
+									<span class="item-badge">加油</span>
+									<span class="item-badge">住宿</span>
+									<span class="item-badge">热水</span>
+									<span class="item-badge">维修</span>
+								</div>
+							</div>
+						</div>
+						<div class="service-bottom">
+							<div class="link-more">查看更多</div>
+						</div>
+					</div>-->
+					
+					
+					<!--收费站 信息窗口-->
+					<!--<div class="zhan-box">
+						<div class="zhan-body">
+							<div class="high-way-mark">
+								<div class="high-way-title">国家高速</div>
+								<div class="high-way-body">
+									<p class="high-way-num">G10</p>
+									<p class="high-way-name">绥满高速</p>
+								</div>
+							</div>
+							<div class="zhan-info">
+								<p class="zhan-name">阿城-中石油服务区</p>
+								<div class="zhan-support">
+									<label>本站支持：</label>
+									<div>
+									<span class="item-badge">现金支付</span>
+									<span class="item-badge">ETC支付</span>
+									<span class="item-badge">无感支付</span>
+									<span class="item-badge">扫码支付</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="zhan-bottom">
+							<div class="link-more">查看更多</div>
+						</div>
+					</div>-->
+
+					<!--城市 信息窗口 -->
+					<!--<div class="city-box">
+						<div class="city-body">
+							<div class="city-title">
+								齐齐哈尔市
+							</div>
+							<div class="city-des">
+								齐齐哈尔，别称鹤城、卜奎。是黑龙江省下辖地级市，也是黑龙江省省域副中心城市，位于黑龙江省西部。“齐齐哈尔”源自达斡尔语，是“边疆”或“天然牧场”之意。意味着这里水草丰美、资源丰富，是人们生活的理想之所。
+							</div>
+						</div>
+						<div class="city-bottom">
+							<div class="link-more">查看更多路况信息</div>
+						</div>
+					</div>-->
+
+					<!--景区 信息窗口 -->
+					<!--<div class="scenery-box">
+						<div class="scenery-body">
+							<div class="scenery-title">
+								齐齐哈尔市
+							</div>
+							<div class="scenery-des">
+								齐齐哈尔，别称鹤城、卜奎。是黑龙江省下辖地级市，也是黑龙江省省域副中心城市，位于黑龙江省西部。“齐齐哈尔”源自达斡尔语，是“边疆”或“天然牧场”之意。意味着这里水草丰美、资源丰富，是人们生活的理想之所。
+							</div>
+						</div>
+						<div class="scenery-bottom">
+							<div class="link-more">查看更多路况信息</div>
+						</div>
+					</div>-->
+
+				</div>
+
+			</div>
+			<!--<button style="z-index: 500; position: absolute; top: 50%; left: 10rem;" type="button" onclick="aa()">1111</button>-->
+
+			<!--toast 遮罩-->
+			<div class="toastmask hide"></div>
+			<div class="loading hide"><img src="images/loading.svg"></div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/toast/toast.script.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+
+		<!--数据-->
+		<script type="text/javascript" src="js/trafficArr.js"></script>
+		<script type="text/javascript" src="js/sareaArr.js"></script>
+		<script type="text/javascript" src="js/zhanArr.js"></script>
+		<script type="text/javascript" src="js/cityArr.js"></script>
+		<script type="text/javascript" src="js/sceneryArr.js"></script>
+
+		<!--高德-->
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=63cd2d0fe58d68595625e3f89b141dda&plugin=AMap.Driving,AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.DistrictSearch"></script>
+		<script type="text/javascript">
+			var AMapUIProtocol = 'https:'; //注意结尾包括冒号
+		</script>
+		<script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+		<script type="text/javascript" src="js/planTrip-Amap.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				initMap();
+			});
+		</script>
+		<script>
+			//跳转
+			function goToSearch() {
+				let href = "search.html";
+				window.location.href = href;
+			}
+		</script>
+	</body>
+
+</html>

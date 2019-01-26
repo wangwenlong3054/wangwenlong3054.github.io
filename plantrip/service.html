@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>服务区详情</title>
+
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.css">
+		<link rel="stylesheet" type="text/css" href="css/plan-trip.css">
+		<link rel="stylesheet" type="text/css" href="css/service.css">
+
+		<link rel="stylesheet" type="text/css" href="css/media.css">
+
+		<link rel="stylesheet" type="text/css" href="js/toast/toast.style.css">
+		<style>
+
+		</style>
+	</head>
+
+	<body id="pageService">
+
+		<div class="header">
+			<div class="header-title flex flex-align-center flex-pack-center ">
+				服务区详情
+			</div>
+			<div class="header-login  ">
+				<a href="javascript:;" onclick="goToIndex()"><span class="header-left-arrow "></span></a>
+			</div>
+		</div>
+
+		<div class="main-content">
+			<div id="allmap" class="child-page-map"></div>
+			<div class="page-info-box">
+				<div class="page-title-box">
+					<div class="high-way-mark">
+						<div class="high-way-title">国家高速</div>
+						<div class="high-way-body">
+							<p class="high-way-num">G10</p>
+							<p class="high-way-name">绥满高速</p>
+						</div>
+					</div>
+					<div class="page-info-content">
+						<div id="name" class="title">
+							<span class="icon-mark mark-eat"></span> <span class="value">尚志服务区</span>
+						</div>
+						<div id="phone" class="phone">
+							<span class="icon-mark mark-tel"></span> <span class="value">18604688440</span>
+						</div>
+						<div id="open" class="open yes">
+							正常营业
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="page-body-box">
+				<div class="gas-box">
+					<div class="title">加油服务</div>
+					<div class="gasoline">
+						<div class="gasoline-name">汽油</div>
+						<div class="gasoline-list">
+							<!--<div class="gasolist-type "><span class="item on">#92</span></div>
+							<div class="gasolist-type "><span class="item on">#92</span></div>
+							<div class="gasolist-type "><span class="item on">#92</span></div>-->
+						</div>
+
+					</div>
+					<div class="dieseloil">
+						<div class="dieseloil-name">柴油</div>
+						<div class="dieseloil-list">
+							<!--<div class="dieseloil-type "><span class="item on">#92</span></div>
+							<div class="dieseloil-type "><span class="item on">#92</span></div>
+							<div class="dieseloil-type "><span class="item on">#92</span></div>-->
+						</div>
+						
+					</div>
+				</div>
+
+				<div class="all-service">
+					<div class="title">全部服务</div>
+					<div class="list">
+						<!--<div class="list-item">
+							<span class="icon-item item-eat"></span>
+							<p>餐饮</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-supermarket"></span>
+							<p>超市</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-toilet"></span>
+							<p>厕所</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-parking"></span>
+							<p>停车</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-gasstation"></span>
+							<p>加油</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-hotel"></span>
+							<p>住宿</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-hotwater"></span>
+							<p>热水</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-repair"></span>
+							<p>维修</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-chargingpile"></span>
+							<p>充电桩</p>
+						</div>
+						<div class="list-item">
+							<span class="icon-item item-fillingstation"></span>
+							<p>加气站</p>
+						</div>-->
+
+					</div>
+				</div>
+			</div>
+
+			<!--toast 遮罩-->
+			<div class="toastmask hide"></div>
+			<div class="loading hide"><img src="images/loading.svg"></div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/toast/toast.script.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+
+		<!--数据-->
+		<script type="text/javascript" src="js/sareaArr.js"></script>
+
+		<!--高德-->
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=63cd2d0fe58d68595625e3f89b141dda&plugin=AMap.Driving,AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.DistrictSearch"></script>
+		<script type="text/javascript">
+			var AMapUIProtocol = 'https:'; //注意结尾包括冒号
+		</script>
+		<script type="text/javascript" src="https://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+		<script type="text/javascript" src="js/page-service.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				initMap();
+			});
+		</script>
+		<script>
+			//跳转
+			function goToIndex() {
+				let href = "index.html";
+				window.location.href = href;
+			}
+		</script>
+	</body>
+
+</html>
