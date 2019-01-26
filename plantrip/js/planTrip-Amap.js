@@ -11,6 +11,8 @@ function initMap() {
 	//搜索
 	//poiStartSearch()
 	//poiEndSearch()
+	trafficMarks();
+	cityMarks();
 
 }
 
@@ -317,6 +319,18 @@ function trafficMarkerClick(e) {
 	$("#infoBox").empty();
 	for(var i = 0; i < trafficArr.length; i++) {
 		if(i == index) {
+//			trafficHtml = '<div class="traffic-box"><div class="traffic-body"><div class="high-way-mark"><div class="high-way-title">国家高速</div>' +
+//				'<div class="high-way-body">' +
+//				'<p class="high-way-num">' + trafficArr[i].highWayNum + '</p>' +
+//				'<p class="high-way-name">' + trafficArr[i].highWayname + '</p>' +
+//				'</div></div><div class="high-way-info">' +
+//				'<p class="highWaySection">' + trafficArr[i].highWaySection + '</p>' +
+//				'<p class="reason">' + trafficArr[i].reason + '</p>' +
+//				'<p class="duration">封闭时间：' + trafficArr[i].duration + '</p>' +
+//				'</div></div><div class="traffic-bottom">' +
+//				'<div class="link-more" id=' + e.target.extData + '>查看更多路况信息</div>' +
+//				'</div></div>';
+				
 			trafficHtml = '<div class="traffic-box"><div class="traffic-body"><div class="high-way-mark"><div class="high-way-title">国家高速</div>' +
 				'<div class="high-way-body">' +
 				'<p class="high-way-num">' + trafficArr[i].highWayNum + '</p>' +
@@ -325,9 +339,7 @@ function trafficMarkerClick(e) {
 				'<p class="highWaySection">' + trafficArr[i].highWaySection + '</p>' +
 				'<p class="reason">' + trafficArr[i].reason + '</p>' +
 				'<p class="duration">封闭时间：' + trafficArr[i].duration + '</p>' +
-				'</div></div><div class="traffic-bottom">' +
-				'<div class="link-more" id=' + e.target.extData + '>查看更多路况信息</div>' +
-				'</div></div>';
+				'</div></div></div>';
 		}
 	}
 	$("#infoBox").append(trafficHtml);
@@ -479,14 +491,23 @@ function zhanMarkerClick(e) {
 	for(var i = 0; i < zhanArr.length; i++) {
 		if(i == index) {
 
+//			zhanHtml = '<div class="zhan-box"><div class="zhan-body"><div class="high-way-mark"><div class="high-way-title">国家高速</div>' +
+//				'<div class="high-way-body">' +
+//				'<p class="high-way-num">' + zhanArr[i].highWayNum + '</p>' +
+//				'<p class="high-way-name">' + zhanArr[i].highWayname + '</p>' +
+//				'</div></div><div class="zhan-info">' +
+//				'<p class="zhan-name">' + zhanArr[i].zhanName + '</p>' +
+//				'<div class="zhan-support"><label>本站支持：</label><div><span class="item-badge">现金支付</span><span class="item-badge">ETC支付</span><span class="item-badge">无感支付</span><span class="item-badge">扫码支付</span></div></div></div></div>' +
+//				'<div class="city-bottom"><div class="link-more" id=' + e.target.extData + '>查看详情</div></div>'
+				
 			zhanHtml = '<div class="zhan-box"><div class="zhan-body"><div class="high-way-mark"><div class="high-way-title">国家高速</div>' +
 				'<div class="high-way-body">' +
 				'<p class="high-way-num">' + zhanArr[i].highWayNum + '</p>' +
 				'<p class="high-way-name">' + zhanArr[i].highWayname + '</p>' +
 				'</div></div><div class="zhan-info">' +
 				'<p class="zhan-name">' + zhanArr[i].zhanName + '</p>' +
-				'<div class="zhan-support"><label>本站支持：</label><div><span class="item-badge">现金支付</span><span class="item-badge">ETC支付</span><span class="item-badge">无感支付</span><span class="item-badge">扫码支付</span></div></div></div></div>' +
-				'<div class="city-bottom"><div class="link-more" id=' + e.target.extData + '>查看详情</div></div>'
+				'<div class="zhan-support"><label>本站支持：</label><div><span class="item-badge">现金支付</span><span class="item-badge">ETC支付</span><span class="item-badge">无感支付</span><span class="item-badge">扫码支付</span></div></div></div></div>' 
+//				'<div class="city-bottom"><div class="link-more" id=' + e.target.extData + '>查看详情</div></div>'
 		}
 	}
 	$("#infoBox").append(zhanHtml);

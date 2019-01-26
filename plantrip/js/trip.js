@@ -70,12 +70,14 @@ function initMap() {
 	
 	if(!queryString("startName") ==""){
 		startName = decodeURI(queryString("startName")) ;
+		$("#start").val(startName);
 	}else{
 		isok = false;
 	}
 	
 	if(!queryString("endName") ==""){
 		endName = decodeURI(queryString("endName")) ;
+		$("#end").val(endName);
 	}else{
 		isok = false;
 	}

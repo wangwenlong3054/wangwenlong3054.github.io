@@ -202,25 +202,61 @@ $("#end").on('touchstart', function(e) {
 	$("#startResult").addClass('hide');
 })
 
-$("#formStart").on('submit', function(e) {
-	console.log("formStart");
-	let startValue = $("#start").val()
-	if(!startValue == "" || startValue == null) {
-		searchAmap('0', startValue);
-	} else {
-		showToast("请输入地点", "warning");
-	}
-})
 
-$("#formEnd").on('submit', function(e) {
-	console.log("formEnd");
-	let endValue = $("#end").val()
-	if(!endValue == "" || endValue == null) {
-		searchAmap('1', endValue);
-	} else {
-		showToast("请输入地点", "warning")
+$("#start").on('keypress', function(e) {
+	let keycode = e.keyCode;
+	//获取搜索框的值
+	let startValue = $(this).val();
+	if(keycode == '13') {
+		e.preventDefault();
+		//请求搜索接口
+		if(startValue == '') {
+			showToast("请输入地点", "warning");
+			//alert('请输入检索内容！');
+		} else {
+			searchAmap('0', startValue);
+			//alert(startValue);
+		}
 	}
-})
+});
+
+$("#end").on('keypress', function(e) {
+	let keycode = e.keyCode;
+	//获取搜索框的值
+	let endValue = $(this).val();
+	if(keycode == '13') {
+		e.preventDefault();
+		//请求搜索接口
+		if(endValue == '') {
+			showToast("请输入地点", "warning");
+			alert('请输入检索内容！');
+		} else {
+			searchAmap('1', endValue);
+			alert(endValue);
+		}
+	}
+});
+
+
+//$("#formStart").on('submit', function(e) {
+//	console.log("formStart");
+//	let startValue = $("#start").val()
+//	if(!startValue == "" || startValue == null) {
+//		searchAmap('0', startValue);
+//	} else {
+//		showToast("请输入地点", "warning");
+//	}
+//})
+
+//$("#formEnd").on('submit', function(e) {
+//	console.log("formEnd");
+//	let endValue = $("#end").val()
+//	if(!endValue == "" || endValue == null) {
+//		searchAmap('1', endValue);
+//	} else {
+//		showToast("请输入地点", "warning")
+//	}
+//})
 
 //值 互换
 function valueChange() {
