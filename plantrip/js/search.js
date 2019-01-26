@@ -229,10 +229,10 @@ $("#end").on('keypress', function(e) {
 		//请求搜索接口
 		if(endValue == '') {
 			showToast("请输入地点", "warning");
-			alert('请输入检索内容！');
+			//alert('请输入检索内容！');
 		} else {
 			searchAmap('1', endValue);
-			alert(endValue);
+			//alert(endValue);
 		}
 	}
 });
