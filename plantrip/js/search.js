@@ -215,6 +215,7 @@ $("#start").on('keypress', function(e) {
 			//alert('请输入检索内容！');
 		} else {
 			searchAmap('0', startValue);
+			document.activeElement.blur();
 			//alert(startValue);
 		}
 	}
@@ -232,6 +233,7 @@ $("#end").on('keypress', function(e) {
 			//alert('请输入检索内容！');
 		} else {
 			searchAmap('1', endValue);
+			document.activeElement.blur();
 			//alert(endValue);
 		}
 	}
