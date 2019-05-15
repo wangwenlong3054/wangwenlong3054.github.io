@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>模板</title>
+
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				font-size: 12px;
+				font-family: 'Microsoft Yahei', '\5FAE\8F6F\96C5\9ED1', 'Sim Sun', '\5B8B\4F53', Arial, sans-serif;
+			}
+			
+			.head {
+				height: 40px;
+				width: 100%;
+				position: relative;
+				z-index: 110;
+				left: 0px;
+				top: 10px;
+			}
+			
+			.head .btn-2 {
+				display: block;
+				width: 42px;
+				height: 45px;
+				background: #000;
+				background-size: 30px;
+				position: absolute;
+				top: 0px;
+				right: 46px;
+			}
+			
+			.head .btn-2 input {
+				width: 42px;
+				height: 45px;
+				position: absolute;
+				right: 0px;
+				top: 0;
+				opacity: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="head">
+			<a class="btn-2">
+				<input type="file" accept="image/*" id="upload" name="upload">
+			</a>
+		</div>
+		<div class="photo" id="preview">upload</div>
+
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+		<script>
+			var upload = document.getElementById('upload'),
+				preview = document.getElementById('preview'),
+				surebtn = document.getElementById('surebtn'),
+				imgurl = '';
+
+			upload.addEventListener('change', handleFile, false);
+			//surebtn.addEventListener('click', upLoadFile, false);
+
+			function handleFile() {
+				window.URL = window.URL || window.webkitURL;
+				var sUserAgent = navigator.userAgent.toLowerCase();
+				var selected_file = upload.files[0];
+
+				if(sUserAgent.match(/android/i) == "android") {
+					var img = new Image();
+					img.src = window.URL.createObjectURL(selected_file);
+					preview.innerHTML = '';
+					preview.appendChild(img);
+
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						imgurl = e.target.result;
+					};
+					reader.readAsDataURL(selected_file);
+
+				} else {
+
+					//判断文件类型是否为图片
+					var imageType = /image.*/;
+
+					if(!selected_file.type.match(imageType)) {
+						return false;
+					}
+
+					var img = document.createElement('img');
+					img.file = selected_file;
+					preview.innerHTML = '';
+					preview.appendChild(img);
+
+					img.onload = function() {
+						imgurl = img.src;
+					}
+
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						img.src = e.target.result;
+					};
+					reader.readAsDataURL(selected_file);
+				}
+			}
+
+			function upLoadFile() {
+				var start = imgurl.indexOf(',') + 1;
+				dataurl = imgurl.substr(start);
+
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.open('post', 'todo.php', true);
+				xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+				xmlhttp.setRequestHeader('X_Requested-With', 'XMLHttpRequest');
+				xmlhttp.send('dataurl=' + encodeURIComponent(dataurl));
+
+				xmlhttp.onreadystatechange = function() {
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						console.log(xmlhttp.responseText)
+					}
+				}
+			}
+		</script>
+
+	</body>
+
+</html>
