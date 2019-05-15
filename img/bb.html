@@ -91,7 +91,7 @@
 //					preview.appendChild(img);
 					
 					imgbox.src = window.URL.createObjectURL(selected_file);
-					urlname.innerHTML = window.URL.createObjectURL(selected_file);
+					urlname.innerHTML = selected_file;
 					
 					var reader = new FileReader();
 					reader.onload = function(e) {
