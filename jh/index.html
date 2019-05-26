@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>帮车宝app网页模块</title>
+
+		<script type="text/javascript" src="js/view_fixed_m.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome-4.7.0.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+
+	</head>
+
+	<body class="tyf-body">
+
+		<div class="header">
+			<a href="javascript:;" class="back visable">
+				<img src="images/icon_back.png" />
+			</a>
+			<div class="title">通远方高速服务</div>
+			<div class="close visable">关闭</div>
+		</div>
+		<div class="body-content">
+
+			<!--banner-->
+			<div class="tyf-banner"></div>
+
+			<!--功能按钮-->
+			<div class="tyf-gs-bar gs-bar-position">
+				<div class="gs-bar-item bar-user">
+					<img src="images/icon_freeway_1.png">
+					<p class="gs-word">用户信息</p>
+				</div>
+				<div class="gs-bar-item bar-order">
+					<img src="images/icon_freeway_2.png">
+					<p class="gs-word">订单信息</p>
+				</div>
+				<!--<div class="gs-bar-item bar-invoice">
+					<img src="images/icon_freeway_3.png">
+					<p class="gs-word">发票信息</p>
+				</div>-->
+			</div>
+
+			<!--通知 状态-->
+			<div class="tyf-gs-noticebox">
+				<!--/*高速  通知 图片 */-->
+				<div id="gsState" class="gs-state bg-1"></div>
+
+				<!--/*高速 通知进行*/-->
+				<div id="gsJx" class="gs-highway-jx ">
+					<div class="lead">
+						欢迎使用高速服务
+					</div>
+					<div class="info">
+						您的车辆于2018年12月22日从哈尔滨收费站进入高速
+					</div>
+					<div class="call">
+						如有疑问，请拨打客服电话96369咨询
+					</div>
+					<div class="jx-btn">点击处理</div>
+				</div>
+
+				<!--/*高速 通知 订单*/-->
+				<div id="gsOrder" class="gs-highway-order ">
+					<div class="order-title">
+						您最近的高速行程
+					</div>
+					<div class="item order-zhan">
+						行驶路径:<span id="zhanIn" class="zhan-in">哈尔滨收费站</span>----<span id="zhanOut" class="zhan-out">牡丹江收费站</span>
+					</div>
+					<div class="item order-money">
+						消费金额:总共<span id="orderMoney">118</span>元
+					</div>
+					<div class="item order-intime">
+						入站时间:<span id="timeIn">2019-05-10 11:25:28</span>
+					</div>
+					<div class="item order-outtime">
+						出站时间:<span id="timeOut">2019-05-10 11:25:28</span>
+					</div>
+					<div class="order-btn">查看电子发票</div>
+				</div>
+
+			</div>
+
+			<!--高速统计-->
+			<div class="tyf-gs-infobox">
+				<div class="infobox-title">
+					用户统计
+				</div>
+				<div class="infobox-list">
+					<div class="item">
+						<div class="key">高速服务总里程</div>
+						<div class="value"><span id="allMileage" class="v-kilometre">0</span>公里</div>
+					</div>
+					<div class="item">
+						<div class="key">高速服务总时长</div>
+						<div class="value"><span id="allH" class="v-hour">0</span>小时<span id="allM" class="v-minute">0</span>分钟</div>
+					</div>
+					<div class="item">
+						<div class="key">高速服务总金额</div>
+						<div class="value"><span id="allMoney" class="v-money">0</span>元</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--<footer class="footer">
+			<ul>
+				<li class="index_icon_active">
+					<img class="home" src="images/icon_home_on.png" />
+					<span class="word">首页</span>
+				</li>
+				<li class="order_icon">
+					<img class="me" src="images/icon_me_off.png">
+					<span class="word">我的</span>
+				</li>
+			</ul>
+		</footer>-->
+		
+		<!--loading-->
+		<div class="z-mask hide"></div>
+		<div class="z-loading hide">
+			<img src="images/loading.gif">
+			<p class="txt">正在加载</p>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/store.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/gsIndex.js"></script>
+
+
+	</body>
+
+</html>

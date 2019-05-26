@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>帮车宝app-高速开通申请-上传照片</title>
+
+		<script type="text/javascript" src="js/view_fixed_m.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome-4.7.0.css">
+
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/gs-apply.css">
+		<link rel="stylesheet" type="text/css" href="css/toast.style.css">
+
+		<style></style>
+
+	</head>
+
+	<body class="tyf-body">
+
+		<div class="header">
+			<a href="index.html" class="back ">
+				<img src="images/icon_back.png" />
+			</a>
+			<div class="title">上传照片</div>
+			<div class="close visable">关闭</div>
+		</div>
+
+		<div id="gsApplyPic" class="body-content ">
+
+			<div class="top-step">
+				<ul>
+					<li class="active">上传照片</li>
+					<li>注册信息</li>
+					<li>等待审核</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="pic-content">
+
+				<div id="uploadGroupOne" class="pic-item pic-part-1 ">
+					<h4>
+						行驶证照片 <span>(为提高照片识别率，请横向拍摄正副本)</span>
+					</h4>
+
+					<div class="pic-box">
+						<div id="picOne" class="upload-btn"></div>
+						<div id="picOneMask" class="pic-mask hide"></div>
+						<div id="picOneDelete" class="delete hide"><i class="fa fa-trash-o"></i></div>
+					</div>
+
+					<div class="pic-box">
+						<div id="picTwo" class="upload-btn "></div>
+						<div id="picTwoMask" class="pic-mask hide"></div>
+						<div id="picTwoDelete" class="delete hide"><i class="fa fa-trash-o"></i></div>
+					</div>
+
+				</div>
+
+				<div id="uploadGroupTwo" class="pic-item pic-part-2 ">
+					<h4>
+						车主证件 <span>(个人传身份证或驾驶证，企业传营业执照)</span>
+					</h4>
+
+					<div class="choose-one">
+						<ul>
+							<li data-num="1" class="active">身份证</li>
+							<li data-num="2">驾驶证</li>
+							<li data-num="3">营业执照</li>
+						</ul>
+					</div>
+
+					<div class="pic-box ">
+						<div id="picThree" class="upload-btn "></div>
+						<div id="picThreeMask" class="pic-mask hide"></div>
+						<div id="picThreeDelete" class="delete hide"><i class="fa fa-trash-o"></i></div>
+					</div>
+
+					<div class="pic-box hide">
+						<div id="picFour" class="upload-btn "></div>
+						<div id="picFourMask" class="pic-mask hide"></div>
+						<div id="picFourDelete" class="delete hide"><i class="fa fa-trash-o"></i></div>
+					</div>
+
+					<div class="pic-box hide">
+						<div id="picFive" class="upload-btn "></div>
+						<div id="picFiveMask" class="pic-mask hide"></div>
+						<div id="picFiveDelete" class="delete hide"><i class="fa fa-trash-o"></i></div>
+					</div>
+
+				</div>
+
+				<div id="uploadGroupThree" class="pic-item pic-part-3 ">
+					<h4>
+						车辆照片 <span>(为提高照片识别率，请保证正面清晰拍摄)</span>
+					</h4>
+
+					<div class="pic-box ">
+						<div id="picSix" class="upload-btn "></div>
+						<div id="picSixMask" class="pic-mask hide"></div>
+						<div id="picSixDelete" class="delete hide"><i class="fa fa-trash-o"></i></div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="foot-btn-content">
+				<button type="button" class="basic-btn" onclick="goNext()">下一步</button>
+
+				<p class="agreement">“下一步” 代表您同意 <span>《帮车宝高速服务开通协议》</span></p>
+			</div>
+
+		</div>
+
+		<div class="z-mask hide"></div>
+		<div class="z-loading hide">
+			<img src="images/loading.gif">
+			<p class="txt">正在加载</p>
+		</div>
+		<div class="toast-mask hide"></div>
+
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/store.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/qiniu/moxie.min.js"></script>
+		<script src="js/qiniu/plupload.min.js"></script>
+		<script src="js/qiniu/qiniu.min.js"></script>
+		<script type="text/javascript" src="js/toast.script.js"></script>
+		<script type="text/javascript" src="js/gsApplyOne.js"></script>
+
+
+	</body>
+
+</html>

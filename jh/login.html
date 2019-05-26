@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<!-- 拒绝百度手机转码 -->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telphone=no, email=no" />
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-orientation" content="portrait">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+		<title>帮车宝-登录</title>
+		<script type="text/javascript" src="js/view_fixed_m.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/toast.style.css">
+	</head>
+
+	<body class="tyf-body">
+
+		<!--header begin-->
+		<div class="header">
+			<a href="index.html" class="back visable">
+				<img src="images/icon_back.png" />
+			</a>
+			<div class="title">登录</div>
+			<div class="close visable">关闭</div>
+		</div>
+
+		<div class="body-content">
+
+			<ul id="loginTab" class="nav nav-tabs " role="tablist">
+				<li role="presentation" class="active">
+					<a href="#pass" role="tab" data-toggle="tab">帐号密码登录</a>
+				</li>
+				<li role="presentation">
+					<a href="#phone" role="tab" data-toggle="tab">手机快捷登录</a>
+				</li>
+
+			</ul>
+
+			<div class="tab-content">
+				<div id="pass" class="tab-pane active">
+					<form id="form-default" class="login-form">
+						<div class="form-item">
+							<div class="item-icon">
+								<span class="icon-phone"></span>
+							</div>
+							<div class="item-input">
+								<input type="text" id="phoneNum_d" value="" class="form-input " placeholder="请输入手机号码" />
+							</div>
+						</div>
+						<div class="form-item">
+							<div class="item-icon">
+								<span class="icon-password"></span>
+							</div>
+							<div class="item-input">
+								<input type="text" id="pwd_d" value="" class="form-input " placeholder="请输入您的密码" />
+							</div>
+						</div>
+
+						<div class="form-submit">
+							<button type="button" onclick="loginByDefault()">立即登录</button>
+						</div>
+					</form>
+				</div>
+
+				<div id="phone" class="tab-pane">
+					<form id="form-quick" class="login-form">
+						<div class="form-item">
+							<div class="item-icon">
+								<span class="icon-phone"></span>
+							</div>
+							<div class="item-input">
+								<input type="text" id="phoneNum_q" value="" class="form-input " placeholder="请输入手机号码" />
+							</div>
+						</div>
+						<div class="form-item">
+							<div class="item-icon">
+								<span class="icon-password"></span>
+							</div>
+							<div class="item-input width-check">
+								<input type="text" id="checkCode_q" class="form-input " placeholder="请输入验证码" />
+							</div>
+							<div class="item-check"><button type="button" class="" onclick="getSmsCode()">获取验证码</button></div>
+						</div>
+
+						<div class="form-submit">
+							<button type="button" onclick="loginByQuick()">立即登录</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="toast-mask hide"></div>
+		<!--loading-->
+		<div class="z-mask hide"></div>
+		<div class="z-loading hide">
+			<img src="images/loading.gif">
+			<p class="txt">正在加载</p>
+		</div>
+		
+	</body>
+
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/toast.script.js"></script>
+	<script type="text/javascript" src="js/store.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+
+</html>
