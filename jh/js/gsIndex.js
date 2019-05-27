@@ -1,7 +1,7 @@
 var userId = "";
 var token = "";
 
-var egsVadType = '0';
+var egsVadType = '1';
 
 //egsVadType = 4
 var messageId = "";
@@ -33,7 +33,7 @@ $(function() {
 	});
 
 	//状态图片 点击
-	$(".gs-state").on('click', function() {
+	$("#gsState").on('click', function() {
 		if(egsVadType == '1') {
 			window.location.href = "gs_open_apply.html";
 		}
