@@ -95,8 +95,8 @@ function initData() {
 
 				//判断状态
 				egsVadType = indexData.egsVadType.toString();
-				
-				$(".log").append("<p>"+egsVadType+"</p>")
+				let logHtml = '<p>'+egsVadType+'</p>'
+				$(".log").append(logHtml)
 
 				if(egsVadType == "1") {
 					$("#gsState").removeClass();
