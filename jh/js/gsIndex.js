@@ -24,7 +24,9 @@ $(function() {
 
 	//用户信息
 	$(".bar-user").on('click', function() {
-		window.location.href = "gs_car_info.html";
+		if(egsVadType != '0'||egsVadType != '1'||egsVadType != '2') {
+			window.location.href = "gs_car_info.html";
+		}
 	});
 
 	//订单信息
@@ -36,6 +38,9 @@ $(function() {
 	$("#gsState").on('click', function() {
 		if(egsVadType == '1') {
 			window.location.href = "gs_open_apply.html";
+		}
+		if(egsVadType == '2') {
+			window.location.href = "gs_open_apply_step3.html";
 		}
 	});
 
