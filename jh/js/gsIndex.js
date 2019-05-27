@@ -22,9 +22,14 @@ $(function() {
 	userId = store.get('userId');
 	token = store.get("userToken");
 
+	//请求数据
+	initData();
+
 	//用户信息
 	$(".bar-user").on('click', function() {
-		if(egsVadType != '0'||egsVadType != '1'||egsVadType != '2') {
+		if(egsVadType == '1' || egsVadType == '2') {
+			showToast("暂无个人信息！","default")
+		}else{
 			window.location.href = "gs_car_info.html";
 		}
 	});
@@ -59,9 +64,6 @@ $(function() {
 		alert("查看电子发票");
 		console.log(scientificNotationToString(order_no))
 	})
-
-	//请求数据
-	initData();
 
 })
 
