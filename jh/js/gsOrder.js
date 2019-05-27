@@ -50,11 +50,16 @@ $(function() {
 					$(".gsorder-list").append(innerHtml);
 				}
 			} else {
+
+				let nodata = '<div class="no-data"><img src="images/icon_nodata.png"><p>暂无数据</p></div>'
+				$(".gsorder-list").append(nodata);
 				console.log("打印 错误" + res.head.msg)
 			}
 		},
 		error: function(e) {
 			closeZZ();
+			let nodata = '<div class="no-data"><img src="images/icon_nodata.png"><p>暂无数据</p></div>'
+			$(".gsorder-list").append(nodata);
 			console.log("error" + e)
 		}
 	})
