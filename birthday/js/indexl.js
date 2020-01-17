@@ -25,14 +25,14 @@ var S = {
     if (i !== -1) {
       S.UI.simulate(decodeURI(action).substring(i + 3));
     } else {
-      S.UI.simulate('亲爱的|祝你|生日|快乐|#countdown 3||');
+      S.UI.simulate('hi|宝宝|祝你|生日|快乐|#countdown 3||');
     }
 
     S.Drawing.loop(function () {
             m++;
       S.Shape.render();
       //console.log(m);
-      if(m==500){
+      if(m==700){
         window.location.href="../html/BirthdayCake.html";
       }
     });
