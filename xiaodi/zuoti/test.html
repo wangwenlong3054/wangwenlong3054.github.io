@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="wwl">
+		<title>我要答题</title>
+		<link rel="shortcut icon" href="xiaodi.ico" />
+		<script type="text/javascript" src="js/view_fixed_m.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css">
+		<link rel="stylesheet" type="text/css" href="js/el/index.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<style>
+
+		</style>
+	</head>
+
+	<body id="myApp">
+		<div id="app" class="">
+			<div class="page-content width-foot">
+				<!--head-->
+				<div class="head">
+					<div class="back" @click="goIndex"><span class="icon-back"></span></div>
+					<div class="title"><span>{{exercisesData.name}}</span></div>
+					<div class="close" @click="saveData"><span>保存</span></div>
+				</div>
+				<!--head end-->
+				<!--body-->
+				<div class="body ">
+					<div class="test-content">
+						<div class="top">
+							<div class="mark" :class="{'checkbox':testData.radio !='1'}"></div>
+							<div class="count"><span>{{testData.id}}</span> / <span>{{exercisesData.indexAll}}</span></div>
+						</div>
+						<div class="body">
+							<div class="name">
+								{{testData.title}}
+							</div>
+							<div class="option">
+								<template v-for="(item ,index ) in testData.options">
+									<template v-if="item !=''">
+										<div class="item" :class="{'on':chooseArr.indexOf(item)>-1}" @click="checkOption(index,item)">
+											{{item}}
+										</div>
+									</template>
+								</template>
+							</div>
+							<div class="answer">
+								<div class="value">
+									<p>我的答案： <span>{{testData.choose}}</span></p>
+								</div>
+							</div>
+							<div class="answer no-margin">
+								<div class="value">
+									<p>正确答案： <span :class="{'hide':!isShowAnswer}">{{testData.answer}}</span></p>
+								</div>
+								<div class="show">
+									<template v-if="isShowAnswer">
+										<el-button type="info" round size="mini" @click="showAnswer()">隐藏答案</el-button>
+									</template>
+									<template v-if="!isShowAnswer">
+										<el-button type="success" round size="mini" @click="showAnswer()">看答案</el-button>
+									</template>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--body end -->
+				<div class="bottom">
+					<div class="left"><span class="xitilist" @click="shwoDtk"></span></div>
+					<div class="right">
+						<!--<div class="finish">
+							<el-button type="info" size="small" @click="jiaojuan">交 卷</el-button>
+						</div>-->
+						<div class="next">
+							<el-button type="danger" size="small" @click="goPrev">上一题</el-button>
+						</div>
+						<div class="next">
+							<el-button type="danger" size="small" @click="goNext">下一题</el-button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!--答题卡-->
+			<div class="dtk-mask" :class="{'hide':!isShowDtk}"></div>
+			<div class="dtk-content" :class="{'hide':!isShowDtk}">
+				<div class="title">
+					<div class="left">
+						<div class="value">正确：{{asr_rightNum}}</div>
+						<div class="value">错误：{{asr_wrongNum}}</div>
+						<div class="value">未完成：{{asr_undoNum}}</div>
+					</div>
+					<div class="right" @click="toggleDtk"><span>关闭</span></div>
+				</div>
+				<div class="dtk-list">
+					<el-scrollbar style="height:100%;width: 100%;">
+						<template v-if="listArr != undefined && listArr.length > 0 ">
+							<template v-for="item in listArr">
+								<template v-if="item.choose ==''">
+									<div class="item" @click="dtkChooseData(item)"><span>{{item.id}}</span></div>
+								</template>
+								<template v-if="item.choose !='' && item.choose == item.answer">
+									<div class="item correct" @click="dtkChooseData(item)"><span>{{item.id}}</span></div>
+								</template>
+								<template v-if="item.choose !='' && item.choose != item.answer">
+									<div class="item wrong" @click="dtkChooseData(item)"><span>{{item.id}}</span></div>
+								</template>
+							</template>
+						</template>
+						<template v-else>
+							<el-empty description="暂无数据"></el-empty>
+						</template>
+					</el-scrollbar>
+				</div>
+			</div>
+
+			<!--loading-->
+			<div class="z-mask " v-bind:class="{hide:isNotLoading}"></div>
+			<div class="z-loading " v-bind:class="{hide:isNotLoading}">
+				<img src="images/loading3.gif">
+				<p class="txt">正在加载</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/Vue/vue.js"></script>
+		<script type="text/javascript" src="js/el/index.js"></script>
+		<script type="text/javascript" src="js/store.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					isNotLoading: true,
+					//习题册信息
+					exercisesData: {
+						"id": 1,
+						"name": "项目负责人资料（B证）",
+						"uurl": "json/1.json",
+						"storeName": "xmfzrbData",
+						"indexAll": 0
+					},
+					//所有习题数据
+					listArr: [],
+					//当前题目信息
+					testData: {},
+					//当前习题 选择的答案
+					chooseArr: [],
+					isShowAnswer: false,
+					//答题卡
+					isShowDtk: false,
+					asr_rightNum: 0,
+					asr_wrongNum: 0,
+					asr_undoNum: 0,
+				},
+				mounted: function() {
+					//获取习题数据
+					if(checkNullOrEmpty(store.get("exercisesData")) != "") {
+						
+						let _saveStroeData = store.get("exercisesData");
+						let _saveStroeDataKeyStr = this.exercisesData.storeName;
+						let _saveStoreKeyIndexStr = this.exercisesData.storeName + "Index";
+						let _saveStoreKeyIndex = 1;
+
+						let _exercisesData = {
+							"id": _saveStroeData.id,
+							"name": _saveStroeData.name,
+							"uurl": _saveStroeData.uurl,
+							"storeName": _saveStroeData.storeName,
+							"indexAll": 0
+						}
+						this.exercisesData = _exercisesData;
+						console.log(this.exercisesData)
+
+						if(checkNullOrEmpty(store.get(_saveStroeDataKeyStr)) != "") {
+							let that = this;
+							this.$confirm('是否继续答题？', '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								showCancelButton: false,
+								closeOnClickModal: false,
+								showClose: false,
+								type: 'warning'
+							}).then(() => {
+								that.listArr = store.get(_saveStroeDataKeyStr);
+								that.exercisesData.indexAll = store.get(_saveStroeDataKeyStr).length;
+								_saveStoreKeyIndex = checkNullOrEmpty(store.get(_saveStoreKeyIndexStr)) == "" ? 1 : store.get(_saveStoreKeyIndexStr) * 1
+								that.objNowXitiData(_saveStoreKeyIndex)
+							}).catch(() => {});
+						}else{
+							this.getTestData();
+						}
+					} else {
+						this.$confirm('缺少参数，请返回重试！', '提示', {
+							confirmButtonText: '确定',
+							cancelButtonText: '取消',
+							showCancelButton: false,
+							closeOnClickModal: false,
+							showClose: false,
+							type: 'warning'
+						}).then(() => {
+							window.location.href = "index.html"
+						}).catch(() => {});
+					}
+
+				},
+				methods: {
+					/*
+					 * 获取习题数据
+					 */
+					getTestData() {
+						this.isNotLoading = false;
+						let that = this;
+						let queryUrl = this.exercisesData.uurl;
+						if(checkNullOrEmpty(queryUrl) != "") {
+							$.ajax({
+								type: "GET",
+								url: queryUrl,
+								data: {},
+								dataType: 'json',
+								success: function(res) {
+									console.log(res)
+									that.listArr = res
+									if(res.length > 0) {
+										//获取 总数
+										that.exercisesData.indexAll = res.length;
+										that.objNowXitiData(1)
+									}
+								},
+								error: function() {
+									that.$message({
+										message: '未找到习题数据!',
+										type: 'error',
+										showClose: true,
+										offset: 80
+									});
+								},
+								complete: function() {
+									that.isNotLoading = true;
+								}
+							})
+						} else {
+							this.$message({
+								message: '未找到习题数据!',
+								type: 'error',
+								showClose: true,
+								offset: 80
+							});
+						}
+					},
+
+					/*
+					 * 包装 当前习题数据
+					 */
+					objNowXitiData(index) {
+						let that = this;
+						this.listArr.map(e => {
+							if(e.id == index) {
+								let _defaultOptions = [];
+								let _option1 = e.option1;
+								let _option2 = e.option2;
+								let _option3 = e.option3;
+								let _option4 = e.option4;
+								let _option5 = e.option5;
+								let _option6 = e.option6;
+								_defaultOptions.push(_option1);
+								_defaultOptions.push(_option2);
+								_defaultOptions.push(_option3);
+								_defaultOptions.push(_option4);
+								_defaultOptions.push(_option5);
+								_defaultOptions.push(_option6);
+
+								let _testData = {
+									"id": e.id,
+									"title": e.title,
+									"answer": e.answer,
+									"options": _defaultOptions,
+									"done": e.done,
+									"choose": e.choose,
+									"radio": e.radio,
+								};
+								that.testData = _testData;
+
+								//将本题目已作答答案 录入到 答案选项数组中
+								let echooseArr = e.choose.split("");
+								let temp_chooseArr = [];
+								if(echooseArr.indexOf('A') > -1) {
+									temp_chooseArr.push(_option1)
+								} else if(echooseArr.indexOf('B') > -1) {
+									temp_chooseArr.push(_option2)
+								} else if(echooseArr.indexOf('C') > -1) {
+									temp_chooseArr.push(_option3)
+								} else if(echooseArr.indexOf('D') > -1) {
+									temp_chooseArr.push(_option4)
+								} else if(echooseArr.indexOf('E') > -1) {
+									temp_chooseArr.push(_option5)
+								} else if(echooseArr.indexOf('F') > -1) {
+									temp_chooseArr.push(_option6)
+								}
+								that.chooseArr = temp_chooseArr;
+							}
+						})
+					},
+
+					/*
+					 * 点击选项
+					 */
+					checkOption(_index, _item) {
+						let _chooseArr = [];
+						if(checkNullOrEmpty(this.testData.radio) == '1') {
+							let value = this.testData.options[_index];
+							_chooseArr.push(_item)
+							this.chooseArr = _chooseArr;
+						} else {
+							// 是-1则数组中匹配不到该数据，添加
+							// 不是-1则说明匹配到了，抹除
+							let value = this.testData.options[_index];
+							let _valueArr = value.split('、');
+							let _valueChoose = _valueArr[0];
+							if(this.chooseArr.indexOf(_item) !== -1) {
+								this.chooseArr.splice(this.chooseArr.indexOf(_item), 1); //取消
+							} else {
+								//选中添加到数组里
+								this.chooseArr.push(_item);
+							}
+						}
+						//console.log(this.chooseArr.length)
+						//console.log(this.chooseArr)
+						// 从最终结果中获取 我选择的答案
+						let chooseLength = this.chooseArr.length;
+						let _chooseArr2 = this.chooseArr.sort();
+						if(chooseLength > 0) {
+							let mychoose = "";
+							for(let i = 0; i < chooseLength; i++) {
+								let _chooseArrItem = _chooseArr2[i];
+								//console.log(_chooseArrItem)
+								let _splitArr = _chooseArrItem.split('、');
+								let valueA = _splitArr[0];
+								mychoose += valueA;
+							}
+							this.testData.choose = mychoose;
+							this.listArr.map(e => {
+								if(e.id == this.testData.id) {
+									e.choose = mychoose;
+								}
+							})
+						} else {
+							this.testData.choose = "";
+							this.listArr.map(e => {
+								if(e.id == this.testData.id) {
+									e.choose = "";
+								}
+							})
+						}
+						//console.log(this.testData.choose)
+					},
+
+					/*
+					 * 点击 显示 答案
+					 */
+					showAnswer() {
+						if(this.isShowAnswer) {
+							this.isShowAnswer = false;
+						} else {
+							this.isShowAnswer = true;
+						}
+					},
+
+					/*
+					 * 下一题
+					 */
+					goNext() {
+						let now_index = this.testData.id * 1;
+						let all_index = this.exercisesData.indexAll * 1;
+						if(checkNullOrEmpty(this.testData.choose) == "") {
+							this.$message({
+								message: '请作答!',
+								type: 'info',
+								showClose: true,
+								offset: 80
+							});
+						} else {
+							if(now_index < all_index) {
+								let next_index = now_index + 1;
+								this.isShowAnswer = false;
+								this.objNowXitiData(next_index);
+							} else {
+								this.$message({
+									message: '已经是最后一道题了!',
+									type: 'info',
+									showClose: true,
+									offset: 80
+								});
+							}
+						}
+
+					},
+
+					/*
+					 * 上一题
+					 */
+					goPrev() {
+						let now_index = this.testData.id * 1;
+						if(now_index > 1) {
+							let next_index = now_index - 1;
+							this.isShowAnswer = false;
+							this.objNowXitiData(next_index)
+						} else {
+							this.$message({
+								message: '请开始答题!',
+								type: 'info',
+								showClose: true,
+								offset: 80,
+							});
+						}
+					},
+
+					/*
+					 * 答题卡 页面 控制
+					 */
+
+					toggleDtk() {
+						if(this.isShowDtk) {
+							this.isShowDtk = false;
+						} else {
+							this.isShowDtk = true;
+						}
+					},
+
+					/*
+					 * 点击底部 答题卡
+					 * 1.展示答题卡UI
+					 * 2.统计答题 结果
+					 */
+					shwoDtk() {
+						this.tongJiAnswerSheetResults();
+						this.toggleDtk();
+					},
+
+					tongJiAnswerSheetResults() {
+						let _asr_rightNum = 0;
+						let _asr_wrongNum = 0;
+						let _asr_undoNum = 0;
+						this.listArr.map(e => {
+							if(e.choose == '') {
+								_asr_undoNum += 1;
+							}
+							if(e.choose != '' && e.choose == e.answer) {
+								_asr_rightNum += 1;
+							}
+							if(e.choose != '' && e.choose != e.answer) {
+								_asr_wrongNum += 1;
+							}
+						})
+						this.asr_rightNum = _asr_rightNum;
+						this.asr_wrongNum = _asr_wrongNum;
+						this.asr_undoNum = _asr_undoNum;
+					},
+
+					/*
+					 * 交卷
+					 * 1.执行 UI 的变化
+					 * 2.统计 答题 结果，并展示到页面
+					 */
+					jiaojuan() {
+
+					},
+
+					/*
+					 * 返回首页
+					 */
+					goIndex() {
+						window.location.href = "index.html"
+					},
+
+					/*
+					 * 保存 数据
+					 */
+					saveData() {
+						let storeKeyStr = this.exercisesData.storeName;
+						let storeKeyIndex = this.exercisesData.storeName + "Index";
+						//缓存数据
+						store.set(storeKeyStr, this.listArr);
+						//缓存进度
+						store.set(storeKeyIndex, this.testData.id)
+						console.log(store.get(storeKeyStr));
+						this.$message({
+							message: '以保存答题进度!',
+							type: 'success',
+							showClose: true,
+							offset: 80,
+						});
+					},
+
+					/*
+					 * 答题卡 点击题  跳转
+					 */
+					dtkChooseData(data) {
+						console.log(data)
+						this.objNowXitiData(data.id);
+						this.toggleDtk()
+					}
+
+				}
+			});
+		</script>
+	</body>
+
+</html>
